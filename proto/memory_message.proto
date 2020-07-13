@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pcbook;
+
+option go_package = "pcbook/pb";
+
+message Memory {
+  // using nested enum since it only applies to memory
+  enum Unit {
+    UNKNOW = 0;
+    BIT = 1;
+    BYTE = 2;
+    KILOBYTE = 3;
+    MEGABYTE = 4;
+    GIGABYTE = 5;
+    TERABYTE = 6;
+  }
+
+  // how many of the specified unit
+  uint64 value = 1;
+  Unit unit = 2;
+}
