@@ -6,11 +6,12 @@ import (
 	"pcbook/serializer"
 	"testing"
 
-	"google.golang.org/protobuf/proto"
+	"github.com/golang/protobuf/proto"
 )
 
 func TestWriteProtobufToBinaryFile(t *testing.T) {
 	binaryFile := "../tmp/laptop.bin"
+	jsonFile := "../tmp/laptop.json"
 
 	laptop1 := sample.NewLaptop()
 
@@ -28,5 +29,10 @@ func TestWriteProtobufToBinaryFile(t *testing.T) {
 
 	if !proto.Equal(laptop1, laptop2) {
 		t.Fatal("The laptop messages don't match")
+	}
+
+	err = serializer.WriteProtobufToJSONFile(laptop2, jsonFile)
+	if err != nil {
+		t.Fatal(err.Error())
 	}
 }
