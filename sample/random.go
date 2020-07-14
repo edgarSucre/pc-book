@@ -3,6 +3,8 @@ package sample
 import (
 	"math/rand"
 	"pcbook/pb"
+
+	"github.com/google/uuid"
 )
 
 func randomKeyboardLayout() pb.Keyboard_Layout {
@@ -54,8 +56,12 @@ func randomInt(min int, max int) int {
 	return min + rand.Intn(max-min+1)
 }
 
-func randomFloat(min float64, max float64) float64 {
+func randomFloat64(min float64, max float64) float64 {
 	return min + rand.Float64()*(max-min)
+}
+
+func randomFloat32(min float32, max float32) float32 {
+	return min + rand.Float32()*(max-min)
 }
 
 func randomGPUBrand() string {
@@ -78,4 +84,31 @@ func randomGPUBName(brand string) string {
 		"RX 5700-XT",
 		"RX Vega-56",
 	)
+}
+
+func randomScreenPanel() pb.Screen_Panel {
+	if rand.Intn(2) == 1 {
+		return pb.Screen_IPS
+	}
+
+	return pb.Screen_OLED
+}
+
+func randomID() string {
+	return uuid.New().String()
+}
+
+func randomLaptopBrand() string {
+	return randomStringFromSet("Apple", "Dell", "Lenovo")
+}
+
+func randomLaptopName(brand string) string {
+	switch brand {
+	case "Apple":
+		return randomStringFromSet("Macbook air", "Macbook Pro")
+	case "Dell":
+		return randomStringFromSet("Latitude", "Vostro", "XPS", "Alienware")
+	default:
+		return randomStringFromSet("Thinkpad X1", "Thinkpad P1", "Thinkpad 53")
+	}
 }
