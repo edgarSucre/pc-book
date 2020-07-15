@@ -13,7 +13,7 @@ import (
 
 //LaptopServer provides laptop services
 type LaptopServer struct {
-	store LaptopStore
+	Store LaptopStore
 }
 
 //NewLaptopServer returns a new LaptopServer
@@ -46,7 +46,7 @@ func (server *LaptopServer) CreateLaptop(
 	}
 
 	//save laptop to the store
-	err := server.store.Save(laptop)
+	err := server.Store.Save(laptop)
 	if err != nil {
 		code := codes.Internal
 		if errors.Is(err, ErrAlreadyExists) {
